@@ -61,6 +61,67 @@ public class Arrays1 {
        
        System.out.println(l);
    }
+   public static void nextpermutation(int nums[]){
+    int idx1=-1;
+    int idx2=-1;
+    //step -1 finding break point from rigth to left
+    for(int i=nums.length-2;i>=0;i--){
+        if(nums[i]<nums[i+1]){
+            idx1 =i;
+            break;
+        }
+    }
+    //if no break point'
+    if(idx1==-1){
+    reverse(nums, 0);
+
+    return;
+    }
+    
+    // breaking point present s-2= find next greatest element & swap idx1 and idx 2
+    for(int i=idx1+1;i<nums.length;i++){
+        if(nums[idx1]<nums[i]){
+            idx2 = i;
+        }
+    }
+    swap(nums, idx1, idx2);
+    //s-3 reverse right half
+    reverse(nums, idx1+1);
+
+    for(int i=0;i<nums.length;i++){
+        System.out.print(nums[i]+" ");
+    }
+}
+public static void swap(int nums[],int x,int y){
+    int temp = nums[x];
+    nums[x] = nums[y];
+    nums[y] =temp;
+}
+public static void reverse(int nums[],int si){
+    int x =si;
+    int y= nums.length-1;
+    while(x<y){
+        swap(nums,x,y);
+        x++;
+        y--;
+    }
+}
+public static int maxAubArray(int nums[]){
+    int curr=0;
+    int max= Integer.MIN_VALUE;
+    for(int i=0;i<nums.length;i++){
+        if(curr<0){
+            curr =0;
+        }
+        curr+=nums[i];
+        if(max<curr){
+            max = curr;
+        }
+    }
+
+    return max;
+}
+
    public static void main(String[] args){
        //int matrix[][] =  {{0,1,2,0},{3,4,5,2},{1,3,1,5}};
        // setZeroes(matrix);
