@@ -91,13 +91,13 @@ public class Arrays1 {
     for(int i=0;i<nums.length;i++){
         System.out.print(nums[i]+" ");
     }
-}
-public static void swap(int nums[],int x,int y){
+    }
+    public static void swap(int nums[],int x,int y){
     int temp = nums[x];
     nums[x] = nums[y];
     nums[y] =temp;
-}
-public static void reverse(int nums[],int si){
+    }
+    public static void reverse(int nums[],int si){
     int x =si;
     int y= nums.length-1;
     while(x<y){
@@ -105,8 +105,8 @@ public static void reverse(int nums[],int si){
         x++;
         y--;
     }
-}
-public static int maxAubArray(int nums[]){
+    }
+    public static int maxAubArray(int nums[]){
     int curr=0;
     int max= Integer.MIN_VALUE;
     for(int i=0;i<nums.length;i++){
@@ -120,7 +120,51 @@ public static int maxAubArray(int nums[]){
     }
 
     return max;
-}
+    }
+    public static void sortcolors(int nums[]){
+
+        int low =0;
+        int mid=0;
+        int high = nums.length-1;
+        while(mid<=high){
+            if(nums[mid]==0){
+                swap1(nums,low,mid);
+                mid++;
+                low++;
+            }else if(nums[mid]==1){
+                mid++;
+            }else{
+                swap1(nums, mid, high);
+                high--;
+            }
+        }
+        for(int i=0;i<nums.length;i++){
+            System.out.print(nums[i]+" ");
+        }
+
+    }
+    public static void swap1(int nums[],int x,int y){
+        int temp = nums[x];
+        nums[x] = nums[y];
+        nums[y] = temp;
+    }
+    public static void stock(int prices[]){
+        int maxprofit =0;
+        int buyingprice = Integer.MAX_VALUE;
+        for(int i=0;i<prices.length;i++){
+            if(buyingprice<prices[i]){
+                int profit = prices[i] - buyingprice;
+                if(profit>maxprofit){
+                    maxprofit= profit;
+                }
+            }else{
+                buyingprice=prices[i];
+            }
+        }
+        System.out.println(maxprofit);
+    }
+
+
 
    public static void main(String[] args){
        //int matrix[][] =  {{0,1,2,0},{3,4,5,2},{1,3,1,5}};
@@ -130,7 +174,9 @@ public static int maxAubArray(int nums[]){
        //         System.out.print(matrix[i][j]+" ");
        //     }System.out.println();
        // }
-       pascalstriangle(3);
+       int nums[] = {2,1,0,1,0,2};
+       //pascalstriangle(3);
+       sortcolors(nums);
        
        
        
