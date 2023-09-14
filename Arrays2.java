@@ -70,11 +70,35 @@ public class Arrays2 {
             System.out.println(ans[j][0]+" "+ans[j][1]);
         }
     }
+    public static void merge(int nums1[],int nums2[],int m,int n){
+        int i = m-1;
+        int j = n-1;
+        int k = m+n-1;
+        while(j>=0){
+            
+            if(i>=0 && nums1[i]>nums2[j]){
+                nums1[k] = nums1[i];
+                k--;i--;
+            }else{
+                nums1[k]=nums2[j];
+                k--;j--;
+            }
+        }
+        for(int x=0;x<nums1.length;x++){
+            System.out.print(nums1[x]+" ");
+        }
+    }
+
     public static void main(String[] args) {
         // int matrix[][] = {{5,1,9,11},{2,4,8,10},{13,3,6,7},{15,14,12,16}};
         // rotate(matrix);
-        int arr[][] = {{1,3},{2,6},{8,10},{15,18}};
-        int arr1[][] = {{1,4}};
-        merge(arr1);
+        // int arr[][] = {{1,3},{2,6},{8,10},{15,18}};
+        // int arr1[][] = {{1,4}};
+        // merge(arr1);
+        int nums1[] = {0};
+        int nums2[] = {1};
+        merge(nums1, nums2, 0, 1);
+     
+
     }
 }
