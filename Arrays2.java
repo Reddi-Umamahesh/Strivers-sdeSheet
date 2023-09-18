@@ -88,19 +88,22 @@ public class Arrays2 {
             System.out.print(nums1[x]+" ");
         }
     }
-    public static void findDuplicate(int nums[]){
-       
-        int sum=0;
-        for(int i=0;i<nums.length;i++){
-            sum+=nums[i];
+    public static int findDuplicate(int nums[]){
+       //marking idx negative ->since the array has elements lees than size
+       int len = nums.length;
+       for(int i=0;i<nums.length;i++){
+            int n = Math.abs(nums[i]);
+            if(nums[n]<0){
+                return n;
+            }else{
+                nums[n] = -nums[n];
+            }
         }
-        
-        int ans = sum;
-        
-        System.out.println(ans);
+
+        return len;
 
     }
-
+    
     public static void main(String[] args) {
         // int matrix[][] = {{5,1,9,11},{2,4,8,10},{13,3,6,7},{15,14,12,16}};
         // rotate(matrix);
@@ -110,8 +113,8 @@ public class Arrays2 {
         int nums1[] = {0};
         int nums2[] = {1};
         //merge(nums1, nums2, 0, 1);
-        int nums[] = {3,1,3,4,2};
-        findDuplicate(nums);
+        int nums[] = {2,3,4,4,4};
+        System.out.println(findDuplicate(nums));
 
     }
 }
