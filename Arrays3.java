@@ -48,6 +48,45 @@ public class Arrays3 {
         }
         return ans;
     }
+    public static int uniquePaths(int m, int n) {
+        if(n==1 || m==1){
+            return 1;
+        }
+        m--;
+        n--;
+       //setting m as max 
+       if(n>m){
+        m = m+n;
+        n = m -n;
+        m = m-n;
+       }
+        long ans =1;
+        int j =1;
+        //calutating factorial in another method (m+n)!/(m!*n!)
+        for(int i=m+1;i<=m+n;i++,j++){
+            ans *= i;
+            ans /= j;
+        }
+        return (int)(ans);
+    }
+
+    public static int reversePairs(int[] nums) {
+        int ans =0;
+        for(int i=0;i<nums.length-1;i++){
+            
+            for(int j=i+1;j<nums.length;j++){
+                long a = nums[i];
+                long b = nums[j];
+                if(a>2*b){
+                    System.out.println(nums[i]+"   "+nums[j]+" "+i+" "+j);
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
+
     public static void main(String args[]){
         int martix[][] = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         //System.out.println(searchMatrix(martix, 3));
@@ -57,6 +96,10 @@ public class Arrays3 {
         // int b =5;
         // System.out.println(a);
         int arr[] = {1};
-        System.out.println(majorityElement2(arr));
+        //System.out.println(majorityElement2(arr));
+        //System.out.println(uniquePaths(10, 10));
+        // [2147483647,2147483647,2147483647,2147483647,2147483647,2147483647]
+        int nums[] = {2147483647,2147483647,2147483647,2147483647,2147483647,2147483647};
+        System.out.println(reversePairs(nums));
     }
 }
