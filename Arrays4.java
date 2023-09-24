@@ -16,8 +16,10 @@ public class Arrays4 {
         for(int i=0;i<nums.length;i++){
             int component = target - nums[i];
             if(map.containsKey(component)){
+                System.out.println(map);
                 return new int[]{map.get(component),i};
             }else{
+                System.out.println(map);
                 map.put(nums[i], i);
             }    
         }
@@ -36,20 +38,22 @@ public class Arrays4 {
     }
     public static List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> ans = new LinkedList<>();
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int j=0;j<nums.length;j++){
+            hm.put(nums[j], j);
+        }
         int i=-1;
         for(int a=0;a<nums.length-3;a++){
             for(int b=a+1;b<nums.length-2;b++){
                 for(int c=b+1;c<nums.length-1;c++){
-                    for(int d = c+1;d<nums.length;d++){
-                        if((nums[a]+nums[b]+nums[c]+nums[d])==target){
-                            List<Integer> l = new LinkedList<>();
-                            l.add(nums[a]);l.add(nums[b]);l.add(nums[c]);l.add(nums[d]);
-                            Collections.sort(l);
-                            if(ans.contains(l)){
-                                    continue;
-                                }else{
-                                    ans.add(l); i++;
-                                }  
+                    //checking for last element in hashmap
+                    int req = target-(nums[a]+nums[b]+nums[c]);
+                    if(hm.containsKey(req)){
+                        List<Integer> l = new LinkedList<>();
+                        l.add(nums[a]);l.add(nums[b]);l.add(nums[c]);l.add(req);
+                        Collections.sort(l);
+                        if(!ans.contains(l)){
+                            ans.add(l);
                         }
                     }
                 }
@@ -116,14 +120,15 @@ public class Arrays4 {
     }   
 
     public static void main(String[] args) {
-        int nums[] = {9,1,4,7,3,-1,0,5,8,-1,6};
+        int nums[] = {2,7,11,15};
         int ans[] = new int[2];
-       // ans = twoSum(nums, 9);
-        //System.out.println(ans[0]+" "+ans[1]);
+        ans = twoSum(nums, 9);
+        System.out.println(ans[0]+" "+ans[1]);
        // fourSum(nums, 4);
       // System.out.println(longestConsecutive(nums));
        String s = "abcadefbhi";
-       System.out.println(lengthOfLongestSubstring(s));
+       //System.out.println(lengthOfLongestSubstring(s));
+       //System.out.println(fourSum(nums,0));
        
     }
 }

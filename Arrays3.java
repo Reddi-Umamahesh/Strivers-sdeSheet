@@ -1,6 +1,7 @@
 package StriverssdeSheet;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +25,26 @@ public class Arrays3 {
         return false;
     }
     public static double mypow(Double x,int n){
-        return (Math.pow(x, n));
+        //fast expo by converting power into binary
+        long a = n;
+        int flag =0;
+        if(a<0){
+            a =Math.abs(a);
+            flag++;
+        }
+        double ans =1;
+        while(a>0){
+            if((a&1)!=0){
+                ans = ans*x;
+            }
+            x = x*x;
+            a = a>>1;
+        }
+        if(flag>0){
+            return 1/ans;
+        }else{
+            return ans;
+        }  
     }
     public static int majorityElement(int nums[]){
         Arrays.sort(nums);
@@ -48,50 +68,54 @@ public class Arrays3 {
         }
         return ans;
     }
-    public static int uniquePaths(int m, int n) {
-        if(n==1 || m==1){
+    public static int uniquePaths(int m, int a) {
+        if(a==1 || m==1){
             return 1;
         }
         m--;
-        n--;
+        a--;
        //setting m as max 
-       if(n>m){
-        m = m+n;
-        n = m -n;
-        m = m-n;
+       if(a>m){
+        m = m+a;
+        a = m -a;
+        m = m-a;
        }
         long ans =1;
         int j =1;
-        //calutating factorial in another method (m+n)!/(m!*n!)
-        for(int i=m+1;i<=m+n;i++,j++){
+        //calutating factorial in another method (m+a)!/(m!*a!)
+        for(int i=m+1;i<=m+a;i++,j++){
             ans *= i;
             ans /= j;
         }
         return (int)(ans);
     }
-
+    static int ans =0;
     public static int reversePairs(int[] nums) {
-        int ans =0;
-        for(int i=0;i<nums.length-1;i++){
-            
-            for(int j=i+1;j<nums.length;j++){
-                long a = nums[i];
-                long b = nums[j];
-                if(a>2*b){
-                    System.out.println(nums[i]+"   "+nums[j]+" "+i+" "+j);
-                    ans++;
-                }
-            }
-        }
+        
         return ans;
+    }
+    public static void utilreversepairs(int sei,int fei,int nums[],int fsi,int ssi){
+        if(ssi==nums.length-1){
+            long a = nums[fsi];
+            long b = nums[ssi];
+            if(a>2*b){
+                ans++;
+            }
+            return;
+        }
+        Arrays.sort(nums,ssi,sei);
+        Collections.reverse(Arrays.asList(nums));
+        //now as the array is reversed starting indexes and end indexes are also reversed 
+        
+        
     }
 
 
     public static void main(String args[]){
         int martix[][] = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         //System.out.println(searchMatrix(martix, 3));
-        // Double x=2.00000; int n=10;
-        // System.out.println(mypow(x, n));
+        // Double x=2.00000; int a=10;
+        // System.out.println(mypow(x, a));
         // Double a = 12.00000;
         // int b =5;
         // System.out.println(a);
@@ -99,7 +123,11 @@ public class Arrays3 {
         //System.out.println(majorityElement2(arr));
         //System.out.println(uniquePaths(10, 10));
         // [2147483647,2147483647,2147483647,2147483647,2147483647,2147483647]
-        int nums[] = {2147483647,2147483647,2147483647,2147483647,2147483647,2147483647};
-        System.out.println(reversePairs(nums));
+        int nums[] = {2,3,4,5,1};
+        //System.out.println(reversePairs(nums));
+        //System.out.println(reversePairs(nums));
+        //System.out.println(5/2);
+        System.out.println(mypow(2.0000,-2147483648));
+        
     }
 }
