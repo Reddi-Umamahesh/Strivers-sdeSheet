@@ -79,20 +79,179 @@ public class Linkedlist1 {
         printll(ans);
         return ans;
     }
-    public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(4);
-        //head.next.next.next = new ListNode(4);
-        //head.next.next.next.next = new ListNode(5);
 
-        ListNode head1 = new ListNode(1);
-        head1.next = new ListNode(3);
-        head1.next.next = new ListNode(4);
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        int k=0;
+        ListNode temp = head;
+        while(temp!=null){
+            k++;
+            temp = temp.next;
+        }
+        if(k==1&&head.next==null){
+            return null;
+        }
+        int e = k-n;
+        if(e==0){
+            head = head.next;
+            return head;
+        }
+        ListNode curr = head;
+        while(e>1){
+            curr = curr.next;
+            e--;
+        }
+        ListNode deleted = curr.next;
+        curr.next = curr.next.next;
+        return head;
+    }
+    
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2){
+        ListNode head1 = l1;
+        ListNode head2 = l2;
+        ListNode ans;
+        int carry =0;
+        int sum = head1.data+head2.data;
+        if(sum<10){
+            ans = new ListNode(sum);
+        }else{
+            ans = new ListNode(sum-10);
+            carry =1;
+        }
+        ListNode temp=ans;
+        head1 = head1.next;
+        head2 = head2.next;
+        printll(ans);
+        System.out.println(sum);
+        while(head1!=null&&head2!=null){
+            sum = head1.data +head2.data +carry;
+            head1 = head1.next;
+            head2 = head2.next;
+            if(sum<10){
+                temp.next = new ListNode(sum);
+                carry =0;
+                temp = temp.next;
+            }else{
+                temp.next = new ListNode(sum-10);
+                carry =1;
+                temp = temp.next;
+            }
+           
+        }
+        while(head1!=null){
+            sum = head1.data +carry;
+            head1 = head1.next;
+            if(sum<10){
+                temp.next = new ListNode(sum);
+                carry =0;
+                temp = temp.next;
+            }else{
+                temp.next = new ListNode(sum-10);
+                carry =1;
+                temp = temp.next;
+            }
+        }
+        while(head2!=null){
+            sum = head2.data +carry;
+            head2 = head2.next;
+            if(sum<10){
+                temp.next = new ListNode(sum);
+                carry =0;
+                temp = temp.next;
+            }else{
+                temp.next = new ListNode(sum-10);
+                carry =1;
+                temp = temp.next;
+            }
+        }
+        if(carry==1){
+            temp.next = new ListNode(1);
+        }
+        printll(ans);
+        return ans;
+        
+    }
+    public static void main(String[] args) {
+        ListNode head = new ListNode(9);
+        head.next = new ListNode(9);
+        head.next.next = new ListNode(9);
+        head.next.next.next = new ListNode(9);
+        head.next.next.next.next = new ListNode(9);
+        head.next.next.next.next.next = new ListNode(9);
+        head.next.next.next.next.next.next = new ListNode(9);
+
+        ListNode head1 = new ListNode(9);
+        head1.next = new ListNode(9);
+        head1.next.next = new ListNode(9);
+        head1.next.next.next = new ListNode(9);
         //reverseList(head);
         //middleNode(head);
-        mergeTwoLists(head,head1);
-        
+        //mergeTwoLists(head,head1);
+        // ListNode ans =removeNthFromEnd(head, 2);
+        // printll(ans);
+        addTwoNumbers(head,head1);
 
     }
+    /*
+     *  ListNode head1 =l1;
+        ListNode head2 = l2;
+        ListNode sol;
+        int sum = head1.data+head2.data ;
+        ListNode temp;
+        if(sum<10){
+            sol = new ListNode(sum);
+            temp = sol;
+        }else{
+            sol = new ListNode(sum-10);
+            sol.next = new ListNode(1);
+            temp = sol.next;
+        }
+        head1 = head1.next;
+        head2 = head2.next;
+        int carry=0;
+        while(head1!=null && head2!=null){
+            System.out.println("hi");
+            sum = head1.data + head2.data+carry;
+            head1 = head1.next;
+            head2 = head2.next;
+                
+            if(sum<10){
+                temp.next = new ListNode(sum);
+                carry=0;
+                temp = temp.next;
+            }else{
+                carry=1;
+                temp.next = new ListNode(sum-10);
+                temp = temp.next;
+            }
+        }
+        while(head1!=null){
+            sum = head1.data+carry;
+            if(sum<10){
+                temp.next = new ListNode(sum);
+                temp = temp.next;
+                carry=0;
+            }else{
+                carry=1;
+                temp.next = new ListNode(sum-10);
+                temp = temp.next;
+            }
+        }
+        while(head2!=null){
+            sum = head2.data + carry;
+            if(sum<10){
+                temp.next = new ListNode(sum);
+                temp = temp.next;
+                carry=0;
+            }else{
+                carry=1;
+                temp.next = new ListNode(sum-10);
+                temp = temp.next;
+            }
+        }
+        if(carry==1){
+            temp.next = new ListNode(carry);
+        }
+        printll(sol);
+        return sol;
+     */
 }
