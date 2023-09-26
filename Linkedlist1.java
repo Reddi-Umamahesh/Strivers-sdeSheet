@@ -170,6 +170,21 @@ public class Linkedlist1 {
         return ans;
         
     }
+    public static void deleteNode(ListNode node) {
+        ListNode curr = node;
+        while(curr.next!=null){
+            curr.data = curr.next.data;
+            curr = curr.next;
+        }
+        curr = null;
+        ListNode temp = node;
+        while(temp.next.next!=null){
+            temp = temp.next;
+        }
+        temp.next = null;
+        printll(head1);
+    }
+    static ListNode head1 = new ListNode(4);
     public static void main(String[] args) {
         ListNode head = new ListNode(9);
         head.next = new ListNode(9);
@@ -179,16 +194,19 @@ public class Linkedlist1 {
         head.next.next.next.next.next = new ListNode(9);
         head.next.next.next.next.next.next = new ListNode(9);
 
-        ListNode head1 = new ListNode(9);
-        head1.next = new ListNode(9);
-        head1.next.next = new ListNode(9);
-        head1.next.next.next = new ListNode(9);
+        
+        head1.next = new ListNode(5);
+       // head1.next.next = new ListNode(1);
+       // head1.next.next.next = new ListNode(9);
         //reverseList(head);
         //middleNode(head);
         //mergeTwoLists(head,head1);
         // ListNode ans =removeNthFromEnd(head, 2);
         // printll(ans);
-        addTwoNumbers(head,head1);
+       // addTwoNumbers(head,head1);
+        deleteNode(head1);
+
+        
 
     }
     /*
