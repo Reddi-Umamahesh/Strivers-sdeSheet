@@ -120,15 +120,16 @@ public class Arrays4 {
     }   
 
     public static void main(String[] args) {
-        int nums[] = {2,7,11,15};
-        int ans[] = new int[2];
-        ans = twoSum(nums, 9);
-        System.out.println(ans[0]+" "+ans[1]);
+        // int nums[] = {2,7,11,15};
+        // int ans[] = new int[2];
+        // ans = twoSum(nums, 9);
+        // System.out.println(ans[0]+" "+ans[1]);
        // fourSum(nums, 4);
       // System.out.println(longestConsecutive(nums));
        String s = "abcadefbhi";
        //System.out.println(lengthOfLongestSubstring(s));
        //System.out.println(fourSum(nums,0));
-       
+       int a =123;
+       System.out.println(a%10);
     }
 }
