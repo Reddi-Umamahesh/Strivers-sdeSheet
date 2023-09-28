@@ -12,12 +12,15 @@ public class LinkedList2 {
     }
 
     public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode l1 = headA;
-        ListNode l2 = headB;
-        while(l1!=null && l2!=null){
+        if(headA==null||headB==null)return null;
+        ListNode a = headA;
+        ListNode b = headB;
+        while(a!=b){
+            a = a==null?headB:a.next;
+            b = b==null?headA:b.next;
             
         }
-        return null;
+       return a;
     }
     public static void printll(ListNode head){
         ListNode curr = head;
@@ -40,10 +43,9 @@ public class LinkedList2 {
         head1.next = new ListNode(1);
         head1.next.next = head.next.next.next;
         // head1.next.next.next = new ListNode(9);
+        printll(head);
         printll(head1);
-        System.out.println(head);
-        if(head.next.next == head1.next.next){
-            System.out.println("hii");
-        }
+        getIntersectionNode(head,head1);
+        
     }
 }
