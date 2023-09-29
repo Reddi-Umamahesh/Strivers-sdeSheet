@@ -30,22 +30,105 @@ public class LinkedList2 {
         }
         System.out.println();
     }
-    public static void main(String[] args){
-        ListNode head = new ListNode(5);
-        head.next = new ListNode(6);
-        head.next.next = new ListNode(1);
-        head.next.next.next = new ListNode(8);
-        head.next.next.next.next = new ListNode(4);
-        head.next.next.next.next.next = new ListNode(5);
-       // head.next.next.next.next.next.next = new ListNode(9);
+    public static boolean hasCycle(ListNode head) {
+        if(head==null||head.next==null){
+            return false;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null&&fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
 
-        ListNode head1 = new ListNode(4);
-        head1.next = new ListNode(1);
-        head1.next.next = head.next.next.next;
-        // head1.next.next.next = new ListNode(9);
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        int len = findlen(head);
+        int NoOfSwaps = len/k;
+        int i=0;
+        ListNode currpos = head;
+        while(NoOfSwaps>0){
+            head =reverse(head, i, k);
+            i+=k;
+            NoOfSwaps--;
+        }
         printll(head);
-        printll(head1);
-        getIntersectionNode(head,head1);
+        return head;
+    }
+    public static int findlen(ListNode head){
+        int len=0;
+        ListNode temp =head;
+        while(temp!=null){
+            temp=temp.next;
+            len++;
+        }
+        return len;
+    }
+    public static ListNode reverse(ListNode head,int k,int l){
+        int j=k;
+        ListNode cur = head;
+        while(j>1){
+            cur = cur.next;
+            j--;
+        }
+        ListNode curr = k==0?head:cur.next;
+        int i=0;
+        ListNode prev = null;
+        ListNode next;
+        while(i<l && curr!=null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            i++;
+        }
+        if(k!=0){
+            cur.next=prev;
+              ListNode temp = prev;
+            while(temp!=null&&temp.next!=null){
+                temp=temp.next;
+            }
+            if(temp!=null){
+                temp.next = curr;
+            }
+
+        }else{
+            ListNode temp = prev;
+            while(temp!=null&&temp.next!=null){
+                temp=temp.next;
+            }
+            
+            if(temp!=null){
+                temp.next = curr;
+            }
+            return prev;
+        }
+        return head;
+    }
+    public static void main(String[] args){
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        // head.next.next.next.next.next = new ListNode(6);
+        // head.next.next.next.next.next.next = new ListNode(7);
+        // head.next.next.next.next.next.next.next = new ListNode(8);
+        // ListNode head1 = new ListNode(4);
+        // head1.next = new ListNode(1);
+        // head1.next.next = head.next.next.next;
+        // head1.next.next.next = new ListNode(9);
+        // printll(head);
+        // printll(head1);
+        // getIntersectionNode(head,head1);
+        // System.out.println(hasCycle(head));
+        reverseKGroup(head, 4);
+        //reverse(head, 0,2);
+
         
     }
 }
