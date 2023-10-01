@@ -216,7 +216,7 @@ public class Linkedlist1 {
 
        // addTwoNumbers(head,head1);
         deleteNode(head1);
-
+    
         
 
 
