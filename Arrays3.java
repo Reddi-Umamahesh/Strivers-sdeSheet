@@ -2,6 +2,7 @@ package StriverssdeSheet;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -109,7 +110,24 @@ public class Arrays3 {
         
         
     }
+      public int reversepairs(int[] nums) {
+        HashMap<Integer,Long> hm = new HashMap<>();
+        int n=nums.length;
+        for(int i=1;i<n;i++){
+            long num = 2*nums[i];
+            hm.put(i,num);
+        }
+        int ans=0;
+        for(int i=0;i<n-1;i++){
+            int x = nums[i];
+            for(long y:hm.values()){
+                if(x>y){
 
+                }
+            }
+        }
+        return ans;
+    }
 
     public static void main(String args[]){
         int martix[][] = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
@@ -127,7 +145,11 @@ public class Arrays3 {
         //System.out.println(reversePairs(nums));
         //System.out.println(reversePairs(nums));
         //System.out.println(5/2);
-        System.out.println(mypow(2.0000,-2147483648));
+       // System.out.println(mypow(2.0000,-2147483648));
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        hm.put(11, 1);
+        hm.put(12, 2);
+        System.out.println(hm.entrySet());
         
     }
 }

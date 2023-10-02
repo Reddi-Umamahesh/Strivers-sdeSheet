@@ -1,8 +1,12 @@
 package StriverssdeSheet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Arrays2 {
@@ -101,7 +105,51 @@ public class Arrays2 {
         }
 
         return len;
-
+    }
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        // Write your code here
+        Collections.sort(arr);
+        int i;
+        int ans[] = new int[2];
+        for(i=0;i<n-1;i++){
+            int curr = arr.get(i);
+            if(curr==arr.get(i+1)){
+                //repeat
+                ans[1] = curr;
+            }else if(curr+1<arr.get(i+1)){
+                //missing
+                ans[0] = curr+1;
+            }
+        }
+        if(arr.get(0)!=1){
+            ans[0] = 1;
+        }
+        if(arr.get(n-1)!=n){
+            //missing 
+            ans[0] = n;
+        }
+        System.out.println(ans[0]+" "+ans[1]);
+        return ans;
+    }
+    public static int maxLen(int arr[], int n)
+    {
+        // Your code here
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int max=0;
+        int ans=0;long sum=0;
+        for(int i=0;i<n;i++){
+            sum += arr[i];
+            if(sum==0){
+                max = Math.max(max, i+1);
+            }
+            if(hm.containsKey(sum)){
+                ans = i-hm.get(sum);
+                max = Math.max(max,ans);
+            }else{
+                hm.put(arr[i],i);
+            }
+        }
+        return max;
     }
     
     public static void main(String[] args) {
@@ -110,11 +158,20 @@ public class Arrays2 {
         // int arr[][] = {{1,3},{2,6},{8,10},{15,18}};
         // int arr1[][] = {{1,4}};
         // merge(arr1);
-        int nums1[] = {0};
+        int nums1[] = {1,-1};
         int nums2[] = {1};
         //merge(nums1, nums2, 0, 1);
-        int nums[] = {2,3,4,4,4};
-        System.out.println(findDuplicate(nums));
-
+        // int nums[] = {2,3,4,4,4};
+        // System.out.println(findDuplicate(nums));
+        ArrayList<Integer> n = new ArrayList<>();
+        n.add(6);
+        n.add(4);
+        n.add(3);
+        n.add(5);
+        n.add(5);
+        n.add(1);
+       // repeatedNumber(n);   
+        // System.out.println(maxLen(nums1,2));
+        missingAndRepeating(n,6);
     }
 }
