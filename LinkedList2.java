@@ -10,14 +10,14 @@ public class LinkedList2 {
             this.next = null;
         }
     }
-    class Node{
+    static class Node{
 	    int data;
 	    Node next;
-	    Node bottom;
+	    Node child;
 	    Node(int d){
 		    data = d;
 		    next = null;
-		    bottom = null;
+		    child = null;
 	    }
     }
 
@@ -176,7 +176,51 @@ public class LinkedList2 {
         }
         return head;
     }
-   
+    public static ListNode flattenLinkedList(Node head) {
+        //Write your code here
+        ListNode ans = new ListNode(head.data);
+        ListNode temp =ans;
+        Node curr = head;
+        Node child = curr.child;
+        Node next = curr.next;
+        while(curr!=null){
+            System.out.println(curr.data);
+            while(child!=null&&next!=null){
+                if(child.data<=next.data){
+                    temp.next = new ListNode(child.data);
+                    child = child.child;
+                    temp = temp.next;
+                }else{
+                    temp.next = new ListNode(next.data);
+                    next = next.child;
+                    temp = temp.next;
+                }
+            }
+            if(child==null&&next!=null){
+                temp.next = new ListNode(next.data);
+                temp = temp.next;
+                curr = curr.next;
+                next = curr.next;
+                child = curr.child;
+            }else if(child!=null&&next==null){
+                
+                return ans;
+            }else{
+                curr = curr.next;
+                if(next!=null){
+                    next = curr.next;
+                }
+                if(child!=null){
+                    child = curr.child;
+                }
+            }
+            
+            
+           
+        }
+        printll(ans);
+        return ans;
+    }
     public static void main(String[] args){
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
@@ -197,11 +241,19 @@ public class LinkedList2 {
        // reverseKGroup(head, 4);
         //reverse(head, 0,2);
        // System.out.println(isPalindrome(head));
-        ListNode temp =detectCycle(head);
-        if(temp!=null){
-            System.out.println(temp.data);
-        }
-
-        
+        // ListNode temp =detectCycle(head);
+        // if(temp!=null){
+        //     System.out.println(temp.data);
+        // }
+        Node h = new Node(1);
+        h.child = new Node(2);
+        h.child.child = new Node(3);
+        h.next = new Node(8);
+        h.next.child = new Node(10);
+        h.next.child.child = new Node(15);
+        h.next.next = new Node(18);
+        h.next.next.child = new Node(22);
+        h.next.next.next = new Node(29);
+        flattenLinkedList(h);
     }
 }

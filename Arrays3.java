@@ -1,10 +1,12 @@
 package StriverssdeSheet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Arrays3 {
     public static boolean searchMatrix(int martix[][],int target){
@@ -128,7 +130,25 @@ public class Arrays3 {
         }
         return ans;
     }
-
+     public int solve(ArrayList<Integer> A, int B) {
+        int ans=0;
+        int n = A.size();
+        Map<Integer,Integer> mpp = new HashMap<>();
+        mpp.put(0,1);
+        int xr= 0;
+        for(int i=0;i<n;i++){
+            xr = A.get(i) ^ xr;
+            int k = B ^ xr;
+            if(mpp.containsKey(k)){
+                ans += mpp.get(k);
+            }if(mpp.containsKey(xr)){
+                mpp.put(xr,mpp.get(xr)+1);
+            }else{
+                mpp.put(xr,1);
+            }
+        }
+        return ans;
+    }
     public static void main(String args[]){
         int martix[][] = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         //System.out.println(searchMatrix(martix, 3));
@@ -149,7 +169,12 @@ public class Arrays3 {
         HashMap<Integer,Integer> hm = new HashMap<>();
         hm.put(11, 1);
         hm.put(12, 2);
-        System.out.println(hm.entrySet());
+       // System.out.println(hm.entrySet());
+      //  System.out.println(6^2);
+        Map<Integer,Integer> mpp = new HashMap<>();
+        mpp.put(0,1);
         
+        if(mpp.containsKey(1))
+            System.out.println("hii");
     }
 }
